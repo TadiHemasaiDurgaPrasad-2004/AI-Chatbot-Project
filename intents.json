@@ -1,0 +1,109 @@
+{
+  "intents": [
+    {
+      "tag": "greeting",
+      "patterns": [
+        "hello",
+        "hi",
+        "hey",
+        "good morning",
+        "good evening"
+      ],
+      "responses": [
+        "Hello! How can I help you?",
+        "Hi there! What would you like to know?",
+        "Hey! I'm happy to help."
+      ]
+    },
+    {
+      "tag": "goodbye",
+      "patterns": [
+        "bye",
+        "goodbye",
+        "see you later",
+        "talk to you later"
+      ],
+      "responses": [
+        "Goodbye! Have a great day.",
+        "See you soon!",
+        "Thanks for chatting. Take care!"
+      ]
+    },
+    {
+      "tag": "name",
+      "patterns": [
+        "what is your name",
+        "who are you",
+        "tell me your name"
+      ],
+      "responses": [
+        "I'm ChatBuddy, a chatbot built with Python, Flask and NLP.",
+        "You can call me ChatBuddy!"
+      ]
+    },
+    {
+      "tag": "purpose",
+      "patterns": [
+        "what can you do",
+        "how can you help me",
+        "what is your purpose"
+      ],
+      "responses": [
+        "I can answer simple questions about greetings, my purpose, Python, NLP and Flask. Try asking me about one of those topics."
+      ]
+    },
+    {
+      "tag": "python",
+      "patterns": [
+        "what is python",
+        "tell me about python",
+        "why use python"
+      ],
+      "responses": [
+        "Python is a popular programming language known for its readable syntax and wide range of libraries."
+      ]
+    },
+    {
+      "tag": "flask",
+      "patterns": [
+        "what is flask",
+        "explain flask",
+        "why use flask"
+      ],
+      "responses": [
+        "Flask is a lightweight Python web framework used to build web applications and APIs."
+      ]
+    },
+    {
+      "tag": "nlp",
+      "patterns": [
+        "what is nlp",
+        "explain natural language processing",
+        "what is natural language processing"
+      ],
+      "responses": [
+        "Natural Language Processing (NLP) helps computers process and work with human language. It includes tasks such as tokenization, stemming and intent recognition."
+      ]
+    },
+    {
+      "tag": "thanks",
+      "patterns": [
+        "thank you",
+        "thanks",
+        "that was helpful"
+      ],
+      "responses": [
+        "You're welcome!",
+        "Happy to help!",
+        "Glad I could help."
+      ]
+    },
+    {
+      "tag": "fallback",
+      "patterns": [],
+      "responses": [
+        "Sorry, I didn't understand that. Try asking about Python, Flask, NLP or my purpose."
+      ]
+    }
+  ]
+}
