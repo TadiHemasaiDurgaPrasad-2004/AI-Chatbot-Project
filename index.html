@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIBuddy - AI Chatbot</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main class="chat-card">
+        <header class="chat-header">
+            <div class="bot-avatar">AI</div>
+            <div>
+                <h1>AIBuddy</h1>
+                <p><span class="status-dot"></span> Online · NLP-powered chatbot</p>
+            </div>
+        </header>
+
+        <section id="chat-messages" class="messages" aria-live="polite">
+            <div class="message bot-message">
+                <span class="sender">AIBuddy</span>
+                <p>Hello! I'm AIBuddy. Ask me about Python, Flask, NLP or how I work.</p>
+            </div>
+        </section>
+
+        <form id="chat-form" class="chat-form">
+            <input id="message-input" type="text" maxlength="500"
+                   placeholder="Type your message..." autocomplete="off" required>
+            <button id="send-button" type="submit">Send</button>
+        </form>
+        <p class="hint">Press Enter to send · Maximum 500 characters</p>
+    </main>
+    <script>
+        const form = document.getElementById("chat-form");
+        const input = document.getElementById("message-input");
+        const messages = document.getElementById("chat-messages");
+        const sendButton = document.getElementById("send-button");
+
+        function addMessage(sender, text, type) {
+            const wrapper = document.createElement("div");
+            wrapper.className = `message ${type}`;
+            const label = document.createElement("span");
+            label.className = "sender";
+            label.textContent = sender;
+            const paragraph = document.createElement("p");
+            paragraph.textContent = text;
+            wrapper.append(label, paragraph);
+            messages.appendChild(wrapper);
+            messages.scrollTop = messages.scrollHeight;
+        }
+
+        form.addEventListener("submit", async (event) => {
+            event.preventDefault();
+            const message = input.value.trim();
+            if (!message) return;
+
+            addMessage("You", message, "user-message");
+            input.value = "";
+            sendButton.disabled = true;
+            sendButton.textContent = "...";
+
+            try {
+                const response = await fetch("/chat", {
+                    method: "POST",
+                    headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify({message})
+                });
+                const data = await response.json();
+                addMessage("AIBuddy", data.reply || "Something went wrong.", "bot-message");
+            } catch (error) {
+                addMessage("AIBuddy", "Could not connect to the server. Please try again.", "bot-message");
+            } finally {
+                sendButton.disabled = false;
+                sendButton.textContent = "Send";
+                input.focus();
+            }
+        });
+    </script>
+</body>
+</html>
